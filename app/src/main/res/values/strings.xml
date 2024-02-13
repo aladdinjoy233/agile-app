@@ -1,3 +1,15 @@
 <resources>
+    <!-- General -->
     <string name="app_name">Agile</string>
+
+    <!-- Página principal -->
+    <string name="login">Log-in</string>
+    <string name="signup">Sign-up</string>
+    <string name="nombre">Nombre</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrar">Registrar</string>
+    <string name="bt_back_desc">Volver a la pantalla de inicio</string>
+    <string name="title_activity_signup">SignupActivity</string>
 </resources>
