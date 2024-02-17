@@ -4,6 +4,8 @@ import com.example.agile.models.Usuario;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface EndpointAgile {
@@ -31,5 +33,9 @@ public interface EndpointAgile {
 //    User signup
     @POST("usuarios/signup")
     Call<String> signup(@Body Usuario usuario);
+
+//    Verify session
+    @GET("usuarios/obtener")
+    Call<Usuario> obtenerUsuario(@Header("Authorization") String token);
 
 }

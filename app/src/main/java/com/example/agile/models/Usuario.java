@@ -1,6 +1,8 @@
 package com.example.agile.models;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private String nombre;
     private String email;
     private String password;
@@ -15,4 +17,10 @@ public class Usuario {
         this.email = email;
         this.password = password;
     }
+
+    public Usuario(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() { return nombre; }
 }

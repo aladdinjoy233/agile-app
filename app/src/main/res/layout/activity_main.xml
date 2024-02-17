@@ -35,11 +35,21 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:layout_constraintVertical_bias="0.067">
 
+        <ProgressBar
+            android:id="@+id/pb_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/text"/>
+
         <Button
             android:id="@+id/btLogin"
             style="@style/Agile.Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="@string/login" />
 
         <Button
@@ -47,6 +57,7 @@
             style="@style/Agile.Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="@string/signup" />
     </LinearLayout>
 

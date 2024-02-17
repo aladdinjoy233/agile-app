@@ -16,6 +16,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.agile.models.Usuario;
 import com.example.agile.request.ApiClient;
 import com.example.agile.request.EndpointAgile;
+import com.example.agile.ui.stores.StoreActivity;
 
 import java.util.Objects;
 
@@ -50,16 +51,14 @@ public class LoginViewModel extends AndroidViewModel {
                 if (response.isSuccessful()) {
 
                     if (response.body() != null) {
-                        SharedPreferences sp = context.getSharedPreferences("agile", Context.MODE_PRIVATE);
+                        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString("token", "Bearer " + response.body());
-                        editor.commit();
+                        editor.apply();
 
-//                        Intent intent = new Intent(context, MainActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        context.startActivity(intent);
-
-                        Toast.makeText(context, "Login exitoso", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, StoreActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intent);
                     }
 
                 } else {
