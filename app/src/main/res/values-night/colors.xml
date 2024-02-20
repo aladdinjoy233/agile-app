@@ -5,10 +5,13 @@
 
     <color name="background">#000</color>
     <color name="text">#FFF</color>
+    <color name="secondaryText">#CCCCCC</color>
     <color name="border">#424242</color>
     <color name="border_selected">@color/primary</color>
 
     <color name="primary">#75BDFF</color>
     <color name="primaryDark">#5F9CEC</color>
     <color name="primaryContrast">#FFF</color>
+
+    <color name="danger">#FF7575</color>
 </resources>

@@ -25,7 +25,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/edittext_border"
+        android:background="@drawable/et_border"
         android:contentDescription="@string/bt_back_desc"
         android:padding="8dp"
         android:scaleType="fitCenter"

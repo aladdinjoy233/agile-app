@@ -73,8 +73,6 @@
                     app:tint="@color/text"
                     android:contentDescription="More Options"/>
             </LinearLayout>
-            
-
 
         </LinearLayout>
 
@@ -90,6 +88,26 @@
             android:layout_height="1dip"
             android:background="@color/border"
             android:layout_marginTop="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"/>
+
+        <ImageButton
+            android:id="@+id/btBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="25dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bt_primary_bg"
+            android:contentDescription="@string/bt_back_desc"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_plus"
+            app:tint="@color/white" />
 
     </LinearLayout>
 
