@@ -20,5 +20,28 @@ public class FormStoreActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(FormStoreViewModel.class);
+
+        vm.getEditMode().observe(this, editMode -> {
+            if (editMode) {
+                binding.tvTitle.setText("Editar tienda");
+                binding.btFinish.setText("Guardar");
+            } else {
+                binding.tvTitle.setText("Nueva tienda");
+                binding.btFinish.setText("Crear");
+            }
+        });
+
+        /*
+        vm.getTienda().observe(this, tienda -> {
+            binding.etNombre.setText(tienda.getNombre());
+            binding.etEmail.setText(tienda.getEmail());
+            binding.etPhone.setText(tienda.getPhone());
+        });
+         */
+
+        vm.init(getIntent().getBooleanExtra("editMode", false));
+
+        //                                                          Nombre                                 Email                                 Teléfono
+        binding.btFinish.setOnClickListener(v -> { vm.guardarTienda(binding.etNombre.getText().toString(), binding.etEmail.getText().toString(), binding.etPhone.getText().toString()); });
     }
 }
