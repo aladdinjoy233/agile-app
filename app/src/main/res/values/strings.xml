@@ -12,4 +12,8 @@
     <string name="registrar">Registrar</string>
     <string name="bt_back_desc">Volver a la pantalla de inicio</string>
     <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_primary">PrimaryActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

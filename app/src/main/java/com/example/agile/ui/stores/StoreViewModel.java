@@ -84,4 +84,11 @@ public class StoreViewModel extends AndroidViewModel {
         context.startActivity(intent);
     }
 
+    public void nuevaTienda() {
+        Intent intent = new Intent(context, FormStoreActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("editMode", false);
+        context.startActivity(intent);
+    }
+
 }

@@ -41,6 +41,8 @@ public class FormStoreActivity extends AppCompatActivity {
 
         vm.init(getIntent().getBooleanExtra("editMode", false));
 
+        binding.btBack.setOnClickListener(v -> finish());
+
         //                                                          Nombre                                 Email                                 Teléfono
         binding.btFinish.setOnClickListener(v -> { vm.guardarTienda(binding.etNombre.getText().toString(), binding.etEmail.getText().toString(), binding.etPhone.getText().toString()); });
     }

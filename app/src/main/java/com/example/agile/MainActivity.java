@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.agile.databinding.ActivityMainBinding;
+import com.example.agile.ui.primary.PrimaryActivity;
 import com.example.agile.ui.stores.StoreActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
+
+        Intent intent = new Intent(this, PrimaryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
 
         vm.getSession().observe(this, session -> {
             if (session) {

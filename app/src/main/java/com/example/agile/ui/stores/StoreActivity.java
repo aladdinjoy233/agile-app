@@ -47,5 +47,9 @@ public class StoreActivity extends AppCompatActivity {
             });
             popupMenu.show();
         });
+
+        binding.btNuevo.setOnClickListener(v -> {
+            vm.nuevaTienda();
+        });
     }
 }

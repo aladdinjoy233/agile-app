@@ -95,7 +95,7 @@
             android:layout_marginTop="25dp"/>
 
         <ImageButton
-            android:id="@+id/btBack"
+            android:id="@+id/btNuevo"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginTop="25dp"
