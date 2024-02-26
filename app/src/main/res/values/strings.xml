@@ -16,4 +16,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Navegation description -->
+    <string name="nav_desc_products">Botón navegación productos</string>
+    <string name="nav_desc_sales">Botón navegación ventas</string>
+    <string name="nav_desc_settings">Botón navegación ajustes</string>
 </resources>

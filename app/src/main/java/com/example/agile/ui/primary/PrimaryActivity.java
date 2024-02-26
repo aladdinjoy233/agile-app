@@ -3,6 +3,9 @@ package com.example.agile.ui.primary;
 import android.os.Bundle;
 
 import com.example.agile.R;
+import com.example.agile.ui.primary.ui.dashboard.DashboardFragment;
+import com.example.agile.ui.primary.ui.home.HomeFragment;
+import com.example.agile.ui.primary.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,15 @@ public class PrimaryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(PrimaryViewModel.class);
+        clickProducts();
+
+        binding.navProducts.setOnClickListener(v -> { clickProducts(); });
+
+        binding.navSales.setOnClickListener(v -> { clickSales(); });
+
+        binding.navSettings.setOnClickListener(v -> { clickSettings(); });
+
+        /*
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -38,6 +50,32 @@ public class PrimaryActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_primary);
         // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        */
+    }
+
+    private void clickProducts() {
+        binding.navProducts.setSelected(true);
+        binding.navSales.setSelected(false);
+        binding.navSettings.setSelected(false);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_primary, new HomeFragment()).commit();
+    }
+
+    private void clickSales() {
+        binding.navProducts.setSelected(false);
+        binding.navSales.setSelected(true);
+        binding.navSettings.setSelected(false);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_primary, new DashboardFragment()).commit();
+    }
+
+    private void clickSettings() {
+        binding.navProducts.setSelected(false);
+        binding.navSales.setSelected(false);
+        binding.navSettings.setSelected(true);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_primary, new NotificationsFragment()).commit();
     }
 
 }
