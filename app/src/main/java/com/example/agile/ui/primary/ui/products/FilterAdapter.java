@@ -47,7 +47,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
             this.binding = binding;
 
             binding.getRoot().setOnClickListener(v -> {
-                Toast.makeText(binding.getRoot().getContext(), binding.tvFilter.getText(), Toast.LENGTH_SHORT).show();
+                binding.tvFilter.setSelected(!binding.tvFilter.isSelected());
             });
         }
     }

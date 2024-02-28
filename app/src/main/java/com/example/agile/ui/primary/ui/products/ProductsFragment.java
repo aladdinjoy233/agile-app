@@ -31,6 +31,11 @@ public class ProductsFragment extends Fragment {
         filters.add("Electronics");
         filters.add("Furniture");
         filters.add("Books");
+        filters.add("Clothes");
+        filters.add("Toys");
+        filters.add("Shoes");
+        filters.add("Garden");
+        filters.add("Others");
 
         binding.rvFilters.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         FilterAdapter adapter = new FilterAdapter(filters, inflater);

@@ -9,6 +9,9 @@
     <color name="border">#424242</color>
     <color name="border_selected">@color/primary</color>
 
+    <color name="filterBG">#333333</color>
+    <color name="filterBGSelected">#D8D8D8</color>
+
     <color name="primary">#75BDFF</color>
     <color name="primaryDark">#5F9CEC</color>
     <color name="primaryContrast">#FFF</color>
