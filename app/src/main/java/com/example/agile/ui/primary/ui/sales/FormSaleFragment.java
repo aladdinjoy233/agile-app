@@ -1,4 +1,4 @@
-package com.example.agile.ui.primary.ui.products;
+package com.example.agile.ui.primary.ui.sales;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,23 +14,23 @@ import android.view.ViewGroup;
 
 import com.example.agile.R;
 
-public class FormProductFragment extends Fragment {
+public class FormSaleFragment extends Fragment {
 
-    private FormProductViewModel vm;
+    private FormSaleViewModel vm;
 
-    public static FormProductFragment newInstance() {
-        return new FormProductFragment();
+    public static FormSaleFragment newInstance() {
+        return new FormSaleFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_form_product, container, false);
+        return inflater.inflate(R.layout.fragment_form_sale, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        vm = new ViewModelProvider(this).get(FormProductViewModel.class);
+        vm = new ViewModelProvider(this).get(FormSaleViewModel.class);
         // TODO: Use the ViewModel
     }
 

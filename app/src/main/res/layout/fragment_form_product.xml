@@ -1,13 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.primary.ui.products.FormProductFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Producto nuevo"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageButton
+        android:id="@+id/btBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/et_border"
+        android:contentDescription="Volver"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back"
+        app:tint="@color/text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintVertical_bias="0.1">
+
+        <!-- Codigo -->
+        <TextView
+            android:id="@+id/tvCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Codigo"
+            android:textSize="14sp"
+            android:labelFor="@+id/etCodigo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etCodigo"
+                style="@style/Agile.EditText"
+                android:background="@drawable/et_border_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/btCodigo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/et_border_right"
+                android:contentDescription="Volver"
+                android:padding="7dp"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_scan"
+                app:tint="@color/text" />
+
+        </LinearLayout>
+
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nombre"
+            android:textSize="14sp"
+            android:labelFor="@+id/etNombre"/>
+
+        <EditText
+            android:id="@+id/etNombre"
+            style="@style/Agile.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:ems="10" />
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/tvPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Precio"
+            android:textSize="14sp"
+            android:labelFor="@+id/etPrecio"/>
+
+        <EditText
+            android:id="@+id/etPrecio"
+            style="@style/Agile.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:inputType="numberDecimal"/>
+
+        <!-- Stock -->
+        <TextView
+            android:id="@+id/tvStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Stock"
+            android:textSize="14sp"
+            android:labelFor="@+id/etStock"/>
+
+        <EditText
+            android:id="@+id/etStock"
+            style="@style/Agile.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:inputType="number"/>
+
+        <!-- Categoria -->
+        <TextView
+            android:id="@+id/tvCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Stock"
+            android:textSize="14sp"
+            android:labelFor="@+id/etStock"/>
+
+        <Spinner
+            android:id="@+id/spCategoria"
+            style="@style/Agile.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+
+        <Button
+            android:id="@+id/btFinish"
+            style="@style/Agile.Btn.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Crear" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
