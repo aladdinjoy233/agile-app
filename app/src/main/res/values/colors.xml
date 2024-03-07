@@ -16,5 +16,7 @@
     <color name="primaryDark">#5F9CEC</color>
     <color name="primaryContrast">#FFF</color>
 
+    <color name="primaryLight">#E0F0FF</color>
+
     <color name="danger">#FF7575</color>
 </resources>
