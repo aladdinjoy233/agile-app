@@ -96,39 +96,147 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <!-- TODO: TEST -->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_sales"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp">
+        app:layout_constraintBottom_toTopOf="@id/bottom_section_container">
 
+        <!-- List of items -->
         <LinearLayout
-            android:id="@+id/expandable"
+            android:id="@+id/item_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_sales_top"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
 
             <View
                 android:layout_width="100dp"
                 android:layout_height="6dp"
                 android:background="@drawable/bg_sales_bar"/>
 
+            <View
+                android:layout_width="100dp"
+                android:layout_height="500dp"
+                android:background="@drawable/bg_sales_bar"/>
+
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Hola"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </LinearLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/bottom_section_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Bottom section -->
+        <LinearLayout
+            android:id="@+id/bottom_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_sales"
+            android:orientation="horizontal"
+            app:behavior_hideable="false"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Hola"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Hola"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Hola"/>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- TODO: TEST-END -->
+
+    <!-- Parent -->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:layout_marginStart="12dp"-->
+    <!--            android:layout_marginEnd="12dp"-->
+    <!--            android:layout_marginBottom="12dp"-->
+    <!--            android:background="@drawable/bg_sales"-->
+
+    <!--            app:behavior_hideable="false"-->
+    <!--            app:behavior_peekHeight="200dp"-->
+    <!--            app:behavior_fitToContents="true"-->
+    <!--            app:layout_behavior="@string/bottom_sheet_behavior">-->
+
+    <!--            &lt;!&ndash; Expandable bar indicator &ndash;&gt;-->
+    <!--            <LinearLayout-->
+    <!--                android:id="@+id/expandable"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="vertical"-->
+    <!--                android:gravity="center"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:layout_marginBottom="10dp">-->
+
+    <!--                <View-->
+    <!--                    android:layout_width="100dp"-->
+    <!--                    android:layout_height="6dp"-->
+    <!--                    android:background="@drawable/bg_sales_bar"/>-->
+
+    <!--                &lt;!&ndash; Generate a lot of content to fill it up &ndash;&gt;-->
+    <!--                <View-->
+    <!--                    android:layout_width="100dp"-->
+    <!--                    android:layout_height="500dp"-->
+    <!--                    android:background="@drawable/bg_sales_bar"/>-->
+
+    <!--            </LinearLayout>-->
+
+    <!--            &lt;!&ndash; Content &ndash;&gt;-->
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:gravity="center"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:layout_marginBottom="10dp">-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginTop="10dp"-->
+    <!--                    android:layout_marginBottom="10dp"-->
+    <!--                    android:text="Hola"/>-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginTop="10dp"-->
+    <!--                    android:layout_marginBottom="10dp"-->
+    <!--                    android:text="Hola"/>-->
+
+    <!--            </LinearLayout>-->
+
+    <!--        </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
