@@ -96,8 +96,6 @@
 
     </LinearLayout>
 
-    <!-- TODO: TEST -->
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,6 +110,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_sales_top"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
             app:layout_behavior="@string/bottom_sheet_behavior">
@@ -119,12 +118,15 @@
             <View
                 android:layout_width="100dp"
                 android:layout_height="6dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_sales_bar"/>
 
-            <View
-                android:layout_width="100dp"
-                android:layout_height="500dp"
-                android:background="@drawable/bg_sales_bar"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvVentas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="64dp" />
 
         </LinearLayout>
 
@@ -146,97 +148,51 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_sales"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:behavior_hideable="false"
             app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <ImageButton
+                android:id="@+id/btExpand"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="Expandir"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bg_ic_flecha"
+                app:tint="@color/primaryDark" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginBottom="10dp"
-                android:text="Hola"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Hola"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Hola"/>
+                android:layout_weight="1"
+                android:text="Total: "
+                android:textAlignment="textEnd"
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btFinish"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/bt_primary_bg"
+                android:contentDescription="Finalizar"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_cart"
+                app:tint="@color/white" />
 
         </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!-- TODO: TEST-END -->
-
-    <!-- Parent -->
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:layout_marginStart="12dp"-->
-    <!--            android:layout_marginEnd="12dp"-->
-    <!--            android:layout_marginBottom="12dp"-->
-    <!--            android:background="@drawable/bg_sales"-->
-
-    <!--            app:behavior_hideable="false"-->
-    <!--            app:behavior_peekHeight="200dp"-->
-    <!--            app:behavior_fitToContents="true"-->
-    <!--            app:layout_behavior="@string/bottom_sheet_behavior">-->
-
-    <!--            &lt;!&ndash; Expandable bar indicator &ndash;&gt;-->
-    <!--            <LinearLayout-->
-    <!--                android:id="@+id/expandable"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="vertical"-->
-    <!--                android:gravity="center"-->
-    <!--                android:layout_marginTop="10dp"-->
-    <!--                android:layout_marginBottom="10dp">-->
-
-    <!--                <View-->
-    <!--                    android:layout_width="100dp"-->
-    <!--                    android:layout_height="6dp"-->
-    <!--                    android:background="@drawable/bg_sales_bar"/>-->
-
-    <!--                &lt;!&ndash; Generate a lot of content to fill it up &ndash;&gt;-->
-    <!--                <View-->
-    <!--                    android:layout_width="100dp"-->
-    <!--                    android:layout_height="500dp"-->
-    <!--                    android:background="@drawable/bg_sales_bar"/>-->
-
-    <!--            </LinearLayout>-->
-
-    <!--            &lt;!&ndash; Content &ndash;&gt;-->
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="horizontal"-->
-    <!--                android:gravity="center"-->
-    <!--                android:layout_marginTop="10dp"-->
-    <!--                android:layout_marginBottom="10dp">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginTop="10dp"-->
-    <!--                    android:layout_marginBottom="10dp"-->
-    <!--                    android:text="Hola"/>-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginTop="10dp"-->
-    <!--                    android:layout_marginBottom="10dp"-->
-    <!--                    android:text="Hola"/>-->
-
-    <!--            </LinearLayout>-->
-
-    <!--        </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

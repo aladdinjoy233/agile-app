@@ -1,5 +1,6 @@
 package com.example.agile.ui.primary.ui.sales;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -24,25 +25,48 @@ public class FormSaleFragment extends Fragment {
 
     private FragmentFormSaleBinding binding;
 
+    private BottomSheetBehavior<LinearLayout> bsbMenu;
+    private BottomSheetBehavior<LinearLayout> bsbList;
+    private FormSaleViewModel vm;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FormSaleViewModel vm = new ViewModelProvider(this).get(FormSaleViewModel.class);
+        vm = new ViewModelProvider(this).get(FormSaleViewModel.class);
 
         binding = FragmentFormSaleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         binding.btBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
-        BottomSheetBehavior<LinearLayout> bsbMenu = BottomSheetBehavior.from(binding.bottomSection);
-        BottomSheetBehavior<LinearLayout> bsbList = BottomSheetBehavior.from(binding.itemList);
+        bsbMenu = BottomSheetBehavior.from(binding.bottomSection);
+        bsbList = BottomSheetBehavior.from(binding.itemList);
 
+        configurarCallbacks();
+
+        binding.btExpand.setOnClickListener(v -> vm.setIsMenuExpanded(bsbList.getState() == BottomSheetBehavior.STATE_COLLAPSED));
+
+        vm.getIsMenuExpanded().observe(getViewLifecycleOwner(), isMenuExpanded -> {
+            if (isMenuExpanded)
+                expandirMenu();
+            else
+                colapsarMenu();
+        });
+
+        return root;
+    }
+
+    private void configurarCallbacks() {
         bsbList.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    Log.d("bottom sheet", "LIST EXPANDED");
+//                    binding.bottomSection.setBackgroundResource(R.drawable.bg_sales_bottom);
+//                    binding.btExpand.setActivated(true);
+                    vm.setIsMenuExpanded(true);
                 } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    Log.d("bottom sheet", "LIST COLLAPSED");
+//                    binding.bottomSection.setBackgroundResource(R.drawable.bg_sales);
+//                    binding.btExpand.setActivated(false);
+                    vm.setIsMenuExpanded(false);
                 }
             }
 
@@ -53,15 +77,25 @@ public class FormSaleFragment extends Fragment {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    Log.d("bottom sheet", "MENU EXPANDED");
-                    bsbList.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    expandirMenu();
+                    vm.setIsMenuExpanded(true);
                 }
             }
 
             @Override public void onSlide(@NonNull View view, float v) {}
         });
+    }
 
-        return root;
+    private void expandirMenu() {
+        bsbList.setState(BottomSheetBehavior.STATE_EXPANDED);
+        binding.bottomSection.setBackgroundResource(R.drawable.bg_sales_bottom);
+        binding.btExpand.setActivated(true);
+    }
+
+    private void colapsarMenu() {
+        bsbList.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        binding.bottomSection.setBackgroundResource(R.drawable.bg_sales);
+        binding.btExpand.setActivated(false);
     }
 
     @Override
