@@ -8,6 +8,7 @@
     <color name="secondaryText">#CCCCCC</color>
     <color name="border">#424242</color>
     <color name="border_selected">@color/primary</color>
+    <color name="textVenta">#496782</color>
 
     <color name="filterBG">#333333</color>
     <color name="filterBGSelected">#D8D8D8</color>

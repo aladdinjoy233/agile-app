@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textVenta"
+                android:text="Producto" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btRestar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="5dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bt_primary_bg_left"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_minus" />
+
+        <EditText
+            android:id="@+id/etCantidad"
+            android:layout_width="54dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_white_square"
+            android:ems="10"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="@color/textVenta"
+            android:text="12" />
+
+
+        <ImageButton
+            android:id="@+id/btSumar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="5dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bt_primary_bg_right"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_add" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textVenta"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:textAlignment="textEnd"
+        android:text="$0.00" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_sales_bar"/>
+
+</LinearLayout>
