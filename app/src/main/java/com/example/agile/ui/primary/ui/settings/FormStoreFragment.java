@@ -1,4 +1,4 @@
-package com.example.agile.ui.primary.ui.products;
+package com.example.agile.ui.primary.ui.settings;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,20 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.agile.R;
-import com.example.agile.databinding.FragmentFormProductBinding;
-import com.example.agile.databinding.FragmentListUserBinding;
-import com.example.agile.ui.primary.ui.settings.ListUserViewModel;
+import com.example.agile.databinding.FragmentFormStoreBinding;
+import com.example.agile.ui.primary.ui.sales.FormSaleViewModel;
 
-public class FormProductFragment extends Fragment {
+public class FormStoreFragment extends Fragment {
 
-    private FragmentFormProductBinding binding;
-    private FormProductViewModel vm;
+    private FragmentFormStoreBinding binding;
+    private FormStoreViewModel vm;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        vm = new ViewModelProvider(this).get(FormProductViewModel.class);
+        vm = new ViewModelProvider(this).get(FormStoreViewModel.class);
 
-        binding = FragmentFormProductBinding.inflate(inflater, container, false);
+        binding = FragmentFormStoreBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         binding.btBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());

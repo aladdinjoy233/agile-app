@@ -9,10 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.agile.R;
 import com.example.agile.databinding.FragmentProductsBinding;
+import com.example.agile.ui.primary.ui.settings.ListUserFragment;
 
 import java.util.ArrayList;
 
@@ -40,6 +44,16 @@ public class ProductsFragment extends Fragment {
         binding.rvFilters.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         FilterAdapter adapter = new FilterAdapter(filters, inflater);
         binding.rvFilters.setAdapter(adapter);
+
+        binding.btNuevo.setOnClickListener(v -> {
+            FragmentManager fm = getParentFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.setReorderingAllowed(true);
+
+            ft.replace(R.id.nav_host_fragment_activity_primary, FormProductFragment.class, null)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         return root;
     }

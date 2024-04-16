@@ -109,7 +109,7 @@
             android:layout_marginTop="16dp"
             android:text="Telefono"
             android:textSize="14sp"
-            android:labelFor="@+id/etPassword"/>
+            android:labelFor="@+id/etPhone"/>
 
         <EditText
             android:id="@+id/etPhone"
@@ -128,8 +128,7 @@
             android:layout_marginTop="16dp"
             android:text="* Obligatorio"
             android:textColor="@color/danger"
-            android:textSize="12sp"
-            android:labelFor="@+id/etPassword"/>
+            android:textSize="12sp"/>
 
         <Button
             android:id="@+id/btFinish"
