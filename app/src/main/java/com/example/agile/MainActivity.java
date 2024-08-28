@@ -25,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
 
-        Intent intent = new Intent(this, PrimaryActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-
         vm.getSession().observe(this, session -> {
             if (session) {
                 binding.pbSession.setVisibility(View.VISIBLE);
