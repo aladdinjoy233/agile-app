@@ -43,6 +43,12 @@ public class FormStoreActivity extends AppCompatActivity {
 
         binding.btBack.setOnClickListener(v -> finish());
 
+        vm.getOperationCompleted().observe(this, completed -> {
+            if (Boolean.TRUE.equals(completed)) {
+                finish();
+            }
+        });
+
         //                                                          Nombre                                 Email                                 Teléfono
         binding.btFinish.setOnClickListener(v -> { vm.guardarTienda(binding.etNombre.getText().toString(), binding.etEmail.getText().toString(), binding.etPhone.getText().toString()); });
     }

@@ -48,6 +48,8 @@ public class LoginViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
 
+                Log.d("LOGIN", "On response");
+
                 if (response.isSuccessful()) {
 
                     if (response.body() != null) {

@@ -1,5 +1,6 @@
 package com.example.agile.request;
 
+import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 
 import retrofit2.Call;
@@ -25,7 +26,7 @@ public interface EndpointAgile {
       @GET("usuarios")
       Call<List<Usuario>> getAll();
     */
-
+//    ===== Funciones de usuarios =====
 //    User login
     @POST("usuarios/login")
     Call<String> login(@Body Usuario usuario);
@@ -38,4 +39,11 @@ public interface EndpointAgile {
     @GET("usuarios/obtener")
     Call<Usuario> obtenerUsuario(@Header("Authorization") String token);
 
+//    ================================
+//    ===== Funciones de tiendas =====
+//    ================================
+
+//    Crear tienda
+    @POST("tiendas/crear")
+    Call<Void> crearTienda(@Header("Authorization") String token, @Body Tienda tienda);
 }

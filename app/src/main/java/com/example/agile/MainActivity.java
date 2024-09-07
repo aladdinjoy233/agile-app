@@ -3,13 +3,10 @@ package com.example.agile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.agile.databinding.ActivityMainBinding;
-import com.example.agile.ui.primary.PrimaryActivity;
-import com.example.agile.ui.stores.StoreActivity;
 
 public class MainActivity extends AppCompatActivity {
 
