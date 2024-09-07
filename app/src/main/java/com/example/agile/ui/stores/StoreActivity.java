@@ -3,6 +3,7 @@ package com.example.agile.ui.stores;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,15 @@ public class StoreActivity extends AppCompatActivity {
 
         vm.getUsuario().observe(this, user -> {
             binding.tvNombre.setText(user.getNombre());
+
+            //        Setear tiendas en el recycler (despues de obtener el usuario)
+            vm.getTiendas().observe(this, tiendas -> {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
+                binding.rvTiendas.setLayoutManager(gridLayoutManager);
+
+                StoreAdapter adapter = new StoreAdapter(tiendas, getLayoutInflater(), user.getId());
+                binding.rvTiendas.setAdapter(adapter);
+            });
         });
 
         binding.btMas.setOnClickListener(v -> {

@@ -15,9 +15,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.agile.MainActivity;
 import com.example.agile.R;
+import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 import com.example.agile.request.ApiClient;
 import com.example.agile.request.EndpointAgile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,10 +31,14 @@ public class StoreViewModel extends AndroidViewModel {
 
     private Context context;
     MutableLiveData<Usuario> usuario = new MutableLiveData<>();
+    MutableLiveData<ArrayList<Tienda>> tiendas;
 
     public StoreViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
+
+        tiendas = new MutableLiveData<>();
+        obtenerTiendas();
     }
 
     public MutableLiveData<Usuario> getUsuario() {
@@ -40,6 +48,8 @@ public class StoreViewModel extends AndroidViewModel {
         }
         return usuario;
     }
+
+    public MutableLiveData<ArrayList<Tienda>> getTiendas() { return tiendas; }
 
     public void init(Usuario usuario) {
         if (usuario != null) {
@@ -70,6 +80,32 @@ public class StoreViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<Usuario> call, @NonNull Throwable t) {}
+        });
+    }
+
+    public void obtenerTiendas() {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        String token = sp.getString("token", "");
+
+        if (token.isEmpty()) {
+            return;
+        }
+
+        EndpointAgile endpoint = ApiClient.getEndpoint();
+        Call<List<Tienda>> call = endpoint.obtenerTiendas(token);
+
+        call.enqueue(new Callback<List<Tienda>>() {
+            @Override
+            public void onResponse(Call<List<Tienda>> call, Response<List<Tienda>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    tiendas.setValue(new ArrayList<>(response.body()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Tienda>> call, Throwable t) {
+                Toast.makeText(context, "Error al obtener tiendas", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

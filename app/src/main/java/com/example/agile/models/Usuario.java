@@ -30,4 +30,5 @@ public class Usuario implements Serializable {
     }
 
     public String getNombre() { return nombre; }
+    public int getId() { return id; }
 }

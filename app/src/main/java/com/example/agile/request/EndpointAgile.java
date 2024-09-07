@@ -3,6 +3,8 @@ package com.example.agile.request;
 import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -46,4 +48,8 @@ public interface EndpointAgile {
 //    Crear tienda
     @POST("tiendas/crear")
     Call<Void> crearTienda(@Header("Authorization") String token, @Body Tienda tienda);
+
+//    Obtener lista de tiendas
+    @GET("tiendas/obtenerlista")
+    Call<List<Tienda>> obtenerTiendas(@Header("Authorization") String token);
 }
