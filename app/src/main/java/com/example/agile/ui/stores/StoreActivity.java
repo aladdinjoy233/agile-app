@@ -1,19 +1,17 @@
 package com.example.agile.ui.stores;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.PopupMenu;
 
 import com.example.agile.R;
 import com.example.agile.databinding.ActivityStoreBinding;
 import com.example.agile.models.Usuario;
 
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends AppCompatActivity implements onStoreDeleteListener, onStoreLeaveListener {
 
     ActivityStoreBinding binding;
     StoreViewModel vm;
@@ -37,7 +35,7 @@ public class StoreActivity extends AppCompatActivity {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
                 binding.rvTiendas.setLayoutManager(gridLayoutManager);
 
-                StoreAdapter adapter = new StoreAdapter(tiendas, getLayoutInflater(), user.getId());
+                StoreAdapter adapter = new StoreAdapter(tiendas, getLayoutInflater(), user.getId(), this, this);
                 binding.rvTiendas.setAdapter(adapter);
             });
         });
@@ -61,5 +59,21 @@ public class StoreActivity extends AppCompatActivity {
         binding.btNuevo.setOnClickListener(v -> {
             vm.nuevaTienda();
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        vm.obtenerTiendas();
+    }
+
+    @Override
+    public void onDeleteStore(int tiendaId) {
+        vm.eliminarTienda(tiendaId);
+    }
+
+    @Override
+    public void onLeaveStore(int tiendaId) {
+        vm.salirTienda(tiendaId);
     }
 }

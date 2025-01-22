@@ -22,6 +22,7 @@ import com.example.agile.request.EndpointAgile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -125,6 +126,64 @@ public class StoreViewModel extends AndroidViewModel {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("editMode", false);
         context.startActivity(intent);
+    }
+
+    public void eliminarTienda(int tiendaId) {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        String token = sp.getString("token", "");
+
+        if (token.isEmpty()) {
+            return;
+        }
+
+        EndpointAgile endpoint = ApiClient.getEndpoint();
+        Call<Void> call = endpoint.eliminarTienda(token, tiendaId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    obtenerTiendas();
+                    Toast.makeText(context, "Tienda eliminada", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Error al eliminar la tienda", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("ERROR", Objects.requireNonNull(t.getMessage()));
+            }
+        });
+    }
+
+    public void salirTienda(int tiendaId) {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        String token = sp.getString("token", "");
+
+        if (token.isEmpty()) {
+            return;
+        }
+
+        EndpointAgile endpoint = ApiClient.getEndpoint();
+        Call<Void> call = endpoint.salirTienda(token, tiendaId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    obtenerTiendas();
+                    Toast.makeText(context, "Saliste de la tienda con éxito", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Error al salir de la tienda", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("ERROR", Objects.requireNonNull(t.getMessage()));
+            }
+        });
     }
 
 }

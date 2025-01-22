@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.agile.R;
 import com.example.agile.databinding.ActivityFormStoreBinding;
@@ -21,8 +22,16 @@ public class FormStoreActivity extends AppCompatActivity {
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(FormStoreViewModel.class);
 
-        vm.getEditMode().observe(this, editMode -> {
-            if (editMode) {
+        boolean editMode = getIntent().getBooleanExtra("editMode", false);
+        if (editMode) {
+            int tiendaId = getIntent().getIntExtra("tiendaId", -1);
+            if (tiendaId != -1) {
+                vm.setTiendaId(tiendaId);
+            }
+        }
+
+        vm.getEditMode().observe(this, isEdit -> {
+            if (isEdit) {
                 binding.tvTitle.setText("Editar tienda");
                 binding.btFinish.setText("Guardar");
             } else {
@@ -31,15 +40,13 @@ public class FormStoreActivity extends AppCompatActivity {
             }
         });
 
-        /*
         vm.getTienda().observe(this, tienda -> {
             binding.etNombre.setText(tienda.getNombre());
             binding.etEmail.setText(tienda.getEmail());
-            binding.etPhone.setText(tienda.getPhone());
+            binding.etPhone.setText(tienda.getTelefono());
         });
-         */
 
-        vm.init(getIntent().getBooleanExtra("editMode", false));
+        vm.init(editMode);
 
         binding.btBack.setOnClickListener(v -> finish());
 

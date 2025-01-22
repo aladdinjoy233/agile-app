@@ -16,6 +16,13 @@ public class Tienda implements Serializable {
     @SerializedName("dueño")
     private Usuario duenio;
 
+    public Tienda(int id, String nombre, String email, String telefono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+    }
+
     public Tienda(String nombre, String email, String telefono) {
         this.nombre = nombre;
         this.email = email;
@@ -23,8 +30,9 @@ public class Tienda implements Serializable {
     }
 
 //    Getters y setters
+    public int getId() { return id; }
     public String getNombre() { return nombre; }
-
     public String getEmail() { return email; }
     public int getDuenioId() { return duenioId; }
+    public String getTelefono() { return telefono; }
 }
