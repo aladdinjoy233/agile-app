@@ -1,5 +1,7 @@
 package com.example.agile.ui.primary.ui.settings;
 
+import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,36 @@ public class SettingsFragment extends Fragment {
         });
 
 //        Modal para eliminar la tienda (binding.btEliminarTienda)
+
+//        Modal para salir la tienda (binding.btSalirTienda)
+        binding.btSalirTienda.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+            builder.setTitle("Confirmar salida")
+                    .setMessage("¿Desea salir de la tienda?\n\nNo podrás volver hasta que te vuelvan a invitar.")
+                    .setPositiveButton("Salir", (dialog, which) -> {
+                        vm.salirTienda();
+                    })
+                    .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+    //        Setear colores de los botónes (rojo para eliminar)
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+        });
+
+
+//        Mostrar / Ocultar botones de la tienda
+        vm.getIsOwner().observe(getViewLifecycleOwner(), isOwner -> {
+            if (isOwner) {
+                binding.btSalirTienda.setVisibility(View.GONE);
+            } else {
+                binding.btModificarTienda.setVisibility(View.GONE);
+                binding.btManejarUsuarios.setVisibility(View.GONE);
+                binding.btEliminarTienda.setVisibility(View.GONE);
+            }
+        });
 
         return root;
     }

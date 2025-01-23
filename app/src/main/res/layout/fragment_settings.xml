@@ -48,5 +48,13 @@
             android:textColor="@color/danger"
             android:text="Eliminar tienda" />
 
+        <Button
+            android:id="@+id/btSalirTienda"
+            style="@style/Agile.Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/danger"
+            android:text="Salir de la tienda" />
+
     </LinearLayout>
 </FrameLayout>

@@ -196,13 +196,6 @@ public class StoreViewModel extends AndroidViewModel {
         Intent intent = new Intent(context, PrimaryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
-
-//        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
-//        int selected_store_id = sp.getInt("selected_store_id", -1);
-//
-//        if (selected_store_id != -1) {
-//            Log.d("SELECTED", selected_store_id + "");
-//        }
     }
 
 }

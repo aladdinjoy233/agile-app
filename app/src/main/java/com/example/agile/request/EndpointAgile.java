@@ -71,4 +71,8 @@ public interface EndpointAgile {
 //    Salir de la tienda
     @POST("tiendas/{id}/salir")
     Call<Void> salirTienda(@Header("Authorization") String token, @Path("id") int id);
+
+//    Es dueño de la tienda
+    @GET("tiendas/{id}/esduenio")
+    Call<Boolean> esDuenio(@Header("Authorization") String token, @Path("id") int id);
 }
