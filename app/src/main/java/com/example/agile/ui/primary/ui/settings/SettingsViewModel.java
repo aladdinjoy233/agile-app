@@ -69,6 +69,43 @@ public class SettingsViewModel extends AndroidViewModel {
         });
     }
 
+    public void eliminarTienda() {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        String token = sp.getString("token", "");
+        int tiendaId = sp.getInt("selected_store_id", -1);
+
+        if (token.isEmpty()) {
+            return;
+        }
+
+        EndpointAgile endpoint = ApiClient.getEndpoint();
+        Call<Void> call = endpoint.eliminarTienda(token, tiendaId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Tienda eliminada", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.remove("selected_store_id");
+                    editor.apply();
+
+                    Intent intent = new Intent(context, StoreActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                } else {
+                    Toast.makeText(context, "Error al eliminar la tienda", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("ERROR", Objects.requireNonNull(t.getMessage()));
+            }
+        });
+    }
+
     public void salirTienda() {
         SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
         String token = sp.getString("token", "");

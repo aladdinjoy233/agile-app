@@ -51,6 +51,22 @@ public class SettingsFragment extends Fragment {
         });
 
 //        Modal para eliminar la tienda (binding.btEliminarTienda)
+        binding.btEliminarTienda.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+            builder.setTitle("Confirmar eliminación")
+                    .setMessage("¿Desea eliminar la tienda?\n\nEsta acción eliminará todos los datos de la tienda.")
+                    .setPositiveButton("Eliminar", (dialog, which) -> {
+                        vm.eliminarTienda();
+                    })
+                    .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            //        Setear colores de los botónes (rojo para eliminar)
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+        });
 
 //        Modal para salir la tienda (binding.btSalirTienda)
         binding.btSalirTienda.setOnClickListener(v -> {
