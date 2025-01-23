@@ -10,8 +10,10 @@ import com.example.agile.ui.primary.ui.settings.SettingsFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.agile.databinding.ActivityPrimaryBinding;
+import com.example.agile.ui.stores.StoreAdapter;
 
 public class PrimaryActivity extends AppCompatActivity {
 
@@ -37,17 +39,27 @@ public class PrimaryActivity extends AppCompatActivity {
         binding.btMas.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, v);
             popupMenu.getMenuInflater().inflate(R.menu.dropdown_user, popupMenu.getMenu());
+
+//            Hacer visible el item de cambiar de tienda
+            popupMenu.getMenu().findItem(R.id.cambiar_tienda).setVisible(true);
+
             popupMenu.setOnMenuItemClickListener(item -> {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.cerrar_sesion) {
                     vm.logout();
                     return true;
+                } else if (itemId == R.id.cambiar_tienda) {
+                     vm.cambiarTienda();
+                     return true;
                 }
-                // else if (itemId == R.id.action_item2) {
                 return false;
             });
             popupMenu.show();
+        });
+
+        vm.getTienda().observe(this, tienda -> {
+            binding.tvNombre.setText(tienda.getNombre());
         });
 
         /*

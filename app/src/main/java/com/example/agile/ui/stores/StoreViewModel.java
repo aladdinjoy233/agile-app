@@ -19,6 +19,7 @@ import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 import com.example.agile.request.ApiClient;
 import com.example.agile.request.EndpointAgile;
+import com.example.agile.ui.primary.PrimaryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,6 +185,24 @@ public class StoreViewModel extends AndroidViewModel {
                 Log.e("ERROR", Objects.requireNonNull(t.getMessage()));
             }
         });
+    }
+
+    public void seleccionarTienda(int tiendaId) {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("selected_store_id", tiendaId);
+        editor.apply();
+
+        Intent intent = new Intent(context, PrimaryActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+
+//        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+//        int selected_store_id = sp.getInt("selected_store_id", -1);
+//
+//        if (selected_store_id != -1) {
+//            Log.d("SELECTED", selected_store_id + "");
+//        }
     }
 
 }

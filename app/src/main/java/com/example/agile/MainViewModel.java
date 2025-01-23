@@ -12,9 +12,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 import com.example.agile.request.ApiClient;
 import com.example.agile.request.EndpointAgile;
+import com.example.agile.ui.primary.PrimaryActivity;
 import com.example.agile.ui.stores.StoreActivity;
 
 import retrofit2.Call;
@@ -68,12 +70,13 @@ public class MainViewModel extends AndroidViewModel {
                     session.setValue(true);
 
                     Usuario usuario = response.body();
+                    checkStoredStore(usuario, token);
 
-                    Intent intent = new Intent(context, StoreActivity.class);
-                    intent.putExtra("usuario", usuario);
-                    Log.d("USUARIO", usuario.toString());
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+//                    Intent intent = new Intent(context, StoreActivity.class);
+//                    intent.putExtra("usuario", usuario);
+//                    Log.d("USUARIO", usuario.toString());
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    context.startActivity(intent);
                 } else {
                     session.setValue(false);
                 }
@@ -84,5 +87,51 @@ public class MainViewModel extends AndroidViewModel {
                 session.setValue(false);
             }
         });
+    }
+
+    private void checkStoredStore(Usuario usuario, String token) {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        int storedStoreId = sp.getInt("selected_store_id", -1);
+
+        if (storedStoreId == -1) {
+//            No tiene tienda guardado
+            goToStoreActivity(usuario);
+            return;
+        }
+
+//        Verificamos que exista la tienda
+        EndpointAgile endpoint = ApiClient.getEndpoint();
+        Call<Tienda> call = endpoint.obtenerTienda(token, storedStoreId);
+
+        call.enqueue(new Callback<Tienda>() {
+            @Override
+            public void onResponse(@NonNull Call<Tienda> call, @NonNull Response<Tienda> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    goToPrimaryActivity(usuario);
+                } else {
+                    sp.edit().remove("selected_store_id").apply();
+                    goToStoreActivity(usuario);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Tienda> call, @NonNull Throwable t) {
+                goToStoreActivity(usuario);
+            }
+        });
+    }
+
+    private void goToStoreActivity(Usuario usuario) {
+        Intent intent = new Intent(context, StoreActivity.class);
+        intent.putExtra("usuario", usuario);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    private void goToPrimaryActivity(Usuario usuario) {
+        Intent intent = new Intent(context, PrimaryActivity.class);
+        intent.putExtra("usuario", usuario);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }

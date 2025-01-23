@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +24,15 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
     private int userId;
     private onStoreDeleteListener deleteListener;
     private onStoreLeaveListener leaveListener;
+    private onStoreSelectListener selectListener;
 
-    public StoreAdapter(ArrayList<Tienda> tiendas, LayoutInflater inflater, int userId, onStoreDeleteListener deleteListener, onStoreLeaveListener leaveListener) {
+    public StoreAdapter(ArrayList<Tienda> tiendas, LayoutInflater inflater, int userId, onStoreDeleteListener deleteListener, onStoreLeaveListener leaveListener, onStoreSelectListener selectListener) {
         this.tiendas = tiendas;
         this.inflater = inflater;
         this.userId = userId;
         this.deleteListener = deleteListener;
         this.leaveListener = leaveListener;
+        this.selectListener = selectListener;
     }
 
     @NonNull
@@ -74,6 +77,13 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 //            Agregamos click listener al botón de salir
             holder.binding.btSalir.setOnClickListener(v -> mostrarDialogSalir(v.getContext(), tienda));
         }
+
+//        Agregamos click listener para abrir la tienda
+        holder.binding.getRoot().setOnClickListener(v -> {
+            if (selectListener != null) {
+                selectListener.onSelectStore(tienda.getId());
+            }
+        });
     }
 
     @Override
@@ -84,7 +94,6 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         builder.setTitle("Confirmar eliminación")
                 .setMessage("¿Desea eliminar la tienda \"" + tienda.getNombre() + "\"?\n\nEsta acción eliminará todos los datos de la tienda.")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
-//                    dialog.dismiss();
                     if (deleteListener != null) {
                         deleteListener.onDeleteStore(tienda.getId());
                     }

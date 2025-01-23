@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cambiar_tienda"
+        android:title="Cambiar de tienda"
+        android:visible="false"
+        android:titleTextColor="@color/text"/>
+
     <item
         android:id="@+id/cerrar_sesion"
         android:title="Cerrar sesión"
         android:titleTextColor="@color/text"/>
+
 </menu>

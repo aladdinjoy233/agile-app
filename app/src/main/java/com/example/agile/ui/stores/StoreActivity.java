@@ -11,7 +11,7 @@ import com.example.agile.R;
 import com.example.agile.databinding.ActivityStoreBinding;
 import com.example.agile.models.Usuario;
 
-public class StoreActivity extends AppCompatActivity implements onStoreDeleteListener, onStoreLeaveListener {
+public class StoreActivity extends AppCompatActivity implements onStoreDeleteListener, onStoreLeaveListener, onStoreSelectListener {
 
     ActivityStoreBinding binding;
     StoreViewModel vm;
@@ -35,7 +35,7 @@ public class StoreActivity extends AppCompatActivity implements onStoreDeleteLis
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
                 binding.rvTiendas.setLayoutManager(gridLayoutManager);
 
-                StoreAdapter adapter = new StoreAdapter(tiendas, getLayoutInflater(), user.getId(), this, this);
+                StoreAdapter adapter = new StoreAdapter(tiendas, getLayoutInflater(), user.getId(), this, this, this);
                 binding.rvTiendas.setAdapter(adapter);
             });
         });
@@ -75,5 +75,10 @@ public class StoreActivity extends AppCompatActivity implements onStoreDeleteLis
     @Override
     public void onLeaveStore(int tiendaId) {
         vm.salirTienda(tiendaId);
+    }
+
+    @Override
+    public void onSelectStore(int tiendaId) {
+        vm.seleccionarTienda(tiendaId);
     }
 }
