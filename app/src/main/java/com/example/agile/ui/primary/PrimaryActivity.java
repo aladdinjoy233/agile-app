@@ -10,15 +10,15 @@ import com.example.agile.ui.primary.ui.settings.SettingsFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.agile.databinding.ActivityPrimaryBinding;
-import com.example.agile.ui.stores.StoreAdapter;
+import com.example.agile.ui.primary.ui.settings.StoreEditedSharedViewModel;
 
 public class PrimaryActivity extends AppCompatActivity {
 
     private ActivityPrimaryBinding binding;
     private PrimaryViewModel vm;
+    private StoreEditedSharedViewModel storeEditedSharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,8 @@ public class PrimaryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(PrimaryViewModel.class);
+        storeEditedSharedViewModel = new ViewModelProvider(this).get(StoreEditedSharedViewModel.class);
+
         clickProducts();
 
         binding.navProducts.setOnClickListener(v -> clickProducts());
@@ -60,6 +62,13 @@ public class PrimaryActivity extends AppCompatActivity {
 
         vm.getTienda().observe(this, tienda -> {
             binding.tvNombre.setText(tienda.getNombre());
+        });
+
+        storeEditedSharedViewModel.getEdicionCompletada().observe(this, completada -> {
+            if (completada) {
+                vm.obtenerTienda();
+                storeEditedSharedViewModel.reset();
+            }
         });
 
         /*
