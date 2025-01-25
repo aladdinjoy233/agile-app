@@ -6,6 +6,8 @@
     android:orientation="horizontal"
     android:padding="10dp"
     android:background="@drawable/et_border"
+    android:layout_marginBottom="14dp"
+    android:id="@+id/llInfo"
     android:gravity="center_vertical">
 
     <LinearLayout

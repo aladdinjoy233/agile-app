@@ -75,4 +75,20 @@ public interface EndpointAgile {
 //    Es dueño de la tienda
     @GET("tiendas/{id}/esduenio")
     Call<Boolean> esDuenio(@Header("Authorization") String token, @Path("id") int id);
+
+//    Obtener usuarios de la tienda
+    @GET("tiendas/{id}/obtenerusuarios")
+    Call<List<Usuario>> obtenerUsuarios(@Header("Authorization") String token, @Path("id") int id);
+
+//    Invitar usuario
+    @POST("tiendas/{id}/invitarusuario")
+    Call<Void> invitarUsuario(@Header("Authorization") String token, @Path("id") int id, @Body Usuario usuario);
+
+//    Eliminar usuario
+    @POST("tiendas/{tiendaId}/eliminarusuario/{userId}")
+    Call<Void> eliminarUsuario(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Path("userId") int userId);
+
+//    Eliminar invitacion
+    @POST("tiendas/{tiendaId}/eliminarinvitacion")
+    Call<Void> eliminarInvitacion(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Body Usuario usuario);
 }
