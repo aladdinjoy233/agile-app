@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agile.R;
 import com.example.agile.databinding.ItemFilterBinding;
+import com.example.agile.models.Categoria;
 
 import java.util.ArrayList;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder> {
 
-    private ArrayList<String> filters;
+    private ArrayList<Categoria> filters;
     private LayoutInflater inflater;
 
-    public FilterAdapter(ArrayList<String> filters, LayoutInflater inflater) {
+    public FilterAdapter(ArrayList<Categoria> filters, LayoutInflater inflater) {
         this.filters = filters;
         this.inflater = inflater;
     }
@@ -33,7 +34,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FilterAdapter.ViewHolder holder, int position) {
-        holder.binding.tvFilter.setText(filters.get(position));
+        holder.binding.tvFilter.setText(filters.get(position).getNombre());
     }
 
     @Override

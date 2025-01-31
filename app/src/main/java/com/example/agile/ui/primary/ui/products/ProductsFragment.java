@@ -30,21 +30,6 @@ public class ProductsFragment extends Fragment {
         binding = FragmentProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        ArrayList<String> filters = new ArrayList<>();
-        filters.add("All");
-        filters.add("Electronics");
-        filters.add("Furniture");
-        filters.add("Books");
-        filters.add("Clothes");
-        filters.add("Toys");
-        filters.add("Shoes");
-        filters.add("Garden");
-        filters.add("Others");
-
-        binding.rvFilters.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        FilterAdapter adapter = new FilterAdapter(filters, inflater);
-        binding.rvFilters.setAdapter(adapter);
-
         binding.btNuevo.setOnClickListener(v -> {
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
@@ -53,6 +38,19 @@ public class ProductsFragment extends Fragment {
             ft.replace(R.id.nav_host_fragment_activity_primary, FormProductFragment.class, null)
                     .addToBackStack(null)
                     .commit();
+        });
+
+        vm.getCategorias().observe(getViewLifecycleOwner(), categorias -> {
+
+//            If there are no categories in the list, hide the filter view
+            if (categorias.isEmpty()) {
+                binding.rvFilters.setVisibility(View.GONE);
+                return;
+            }
+
+            binding.rvFilters.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            FilterAdapter adapter = new FilterAdapter(categorias, inflater);
+            binding.rvFilters.setAdapter(adapter);
         });
 
         return root;

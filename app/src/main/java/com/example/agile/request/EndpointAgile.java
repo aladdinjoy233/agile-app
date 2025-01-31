@@ -1,5 +1,6 @@
 package com.example.agile.request;
 
+import com.example.agile.models.Categoria;
 import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 
@@ -91,4 +92,12 @@ public interface EndpointAgile {
 //    Eliminar invitacion
     @POST("tiendas/{tiendaId}/eliminarinvitacion")
     Call<Void> eliminarInvitacion(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Body Usuario usuario);
+
+//    ===================================
+//    ===== Funciones de categorias =====
+//    ===================================
+
+//    Obtener lista de categorias
+    @GET("categorias/listar/{tiendaId}")
+    Call<List<Categoria>> obtenerCategorias(@Header("Authorization") String token, @Path("tiendaId") int tiendaId);
 }
