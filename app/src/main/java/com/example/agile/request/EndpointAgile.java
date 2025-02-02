@@ -1,6 +1,7 @@
 package com.example.agile.request;
 
 import com.example.agile.models.Categoria;
+import com.example.agile.models.Producto;
 import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
 
@@ -100,4 +101,12 @@ public interface EndpointAgile {
 //    Obtener lista de categorias
     @GET("categorias/listar/{tiendaId}")
     Call<List<Categoria>> obtenerCategorias(@Header("Authorization") String token, @Path("tiendaId") int tiendaId);
+
+//    ==================================
+//    ===== Funciones de productos =====
+//    ==================================
+
+//    Obtener lista de productos
+    @GET("productos/listar/{tiendaId}")
+    Call<List<Producto>> obtenerProductos(@Header("Authorization") String token, @Path("tiendaId") int tiendaId);
 }
