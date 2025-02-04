@@ -17,22 +17,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface EndpointAgile {
-
-    /*
-      === POST Example ===
-      @POST("usuarios/login")
-      Call<String> login(@Body Usuario usuario);
-
-
-      === POST Token Example ===
-      @POST("usuarios/edit")
-      Call<Usuario> edit(@Header("Authorization") String token, @Body Usuario usuario);
-
-
-      === GET Example ===
-      @GET("usuarios")
-      Call<List<Usuario>> getAll();
-    */
 //    ===== Funciones de usuarios =====
 //    User login
     @POST("usuarios/login")
@@ -109,4 +93,20 @@ public interface EndpointAgile {
 //    Obtener lista de productos
     @GET("productos/listar/{tiendaId}")
     Call<List<Producto>> obtenerProductos(@Header("Authorization") String token, @Path("tiendaId") int tiendaId);
+
+//    Obtener producto
+    @GET("productos/obtener/{tiendaId}/{productoId}")
+    Call<Producto> obtenerProducto(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Path("productoId") int productoId);
+
+//    Crear producto
+    @POST("productos/crear/{tiendaId}")
+    Call<Void> crearProducto(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Body Producto producto);
+
+//    Editar producto
+    @PUT("productos/editar/{tiendaId}/{productoId}")
+    Call<Void> editarProducto(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Path("productoId") int productoId, @Body Producto producto);
+
+//    Eliminar producto
+    @DELETE("productos/eliminar/{tiendaId}/{productoId}")
+    Call<Void> eliminarProducto(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Path("productoId") int productoId);
 }

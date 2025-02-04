@@ -11,16 +11,23 @@ import com.example.agile.databinding.ItemFilterBinding;
 import com.example.agile.models.Categoria;
 import com.example.agile.models.Producto;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private ArrayList<Producto> productos;
     private LayoutInflater inflater;
+    private OnProductClickListener listener;
 
-    public ProductAdapter(ArrayList<Producto> productos, LayoutInflater inflater) {
+    public interface OnProductClickListener {
+        void onProductClick(int productId);
+    }
+
+    public ProductAdapter(ArrayList<Producto> productos, LayoutInflater inflater, OnProductClickListener listener) {
         this.productos = productos;
         this.inflater = inflater;
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,12 +40,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         holder.binding.tvProducto.setText(productos.get(position).getNombre());
-        holder.binding.tvPrecio.setText("$" + productos.get(position).getPrecio());
+        holder.binding.tvPrecio.setText(formatPrecio(productos.get(position).getPrecio()));
         holder.binding.tvStock.setText("Stock: " + productos.get(position).getStock());
+
+        holder.binding.getRoot().setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onProductClick(productos.get(position).getProductoId());
+            }
+        });
     }
 
     @Override
     public int getItemCount() { return productos.size(); }
+
+    private String formatPrecio(float precio) {
+        float f = Math.round(precio * 100f) / 100f;
+
+        DecimalFormat df = new DecimalFormat("$#0.00");
+        return df.format(f);
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardProductBinding binding;

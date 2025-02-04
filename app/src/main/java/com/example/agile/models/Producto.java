@@ -7,7 +7,7 @@ public class Producto {
     private String nombre;
     private float precio;
     private int stock;
-    private int categoriaId;
+    private int categoriaId = 0;
 
     public Producto(int tiendaId, String codigo, String nombre, float precio, int stock, int categoriaId) {
         this.tiendaId = tiendaId;

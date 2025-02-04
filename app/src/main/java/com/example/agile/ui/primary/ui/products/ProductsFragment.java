@@ -32,9 +32,12 @@ public class ProductsFragment extends Fragment implements FilterAdapter.OnCatego
 
     private FragmentProductsBinding binding;
     private ProductsViewModel vm;
+    private ProductSharedViewModel sharedViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vm = new ViewModelProvider(this).get(ProductsViewModel.class);
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(ProductSharedViewModel.class);
 
         binding = FragmentProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -64,7 +67,26 @@ public class ProductsFragment extends Fragment implements FilterAdapter.OnCatego
 
         vm.getProductosFiltrados().observe(getViewLifecycleOwner(), productos -> {
            binding.rvProductos.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
-            ProductAdapter adapter = new ProductAdapter(productos, inflater);
+            ProductAdapter adapter = new ProductAdapter(productos, inflater, productId -> {
+
+//                Creamos los bundle
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("editMode", true);
+                bundle.putInt("productId", productId);
+
+//                Navegar al form
+                FragmentManager fm = getParentFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setReorderingAllowed(true);
+
+                Fragment formProductFragment = new FormProductFragment();
+                formProductFragment.setArguments(bundle);
+
+                ft.replace(R.id.nav_host_fragment_activity_primary, formProductFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+            });
             binding.rvProductos.setAdapter(adapter);
         });
 
@@ -90,6 +112,14 @@ public class ProductsFragment extends Fragment implements FilterAdapter.OnCatego
                 return true;
             }
             return false;
+        });
+
+//        Observe refresh trigger
+        sharedViewModel.getRefreshTrigger().observe(getViewLifecycleOwner(), trigger -> {
+            if (trigger) {
+                vm.obtenerProductos();
+                sharedViewModel.resetRefresh();
+            }
         });
 
         return root;

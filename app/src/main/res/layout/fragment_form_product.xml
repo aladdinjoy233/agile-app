@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:labelFor="@+id/etStock"
-            android:text="Stock"
+            android:text="Categoría"
             android:textSize="14sp" />
 
         <Spinner
@@ -182,13 +182,31 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp" />
 
-        <Button
-            android:id="@+id/btFinish"
-            style="@style/Agile.Btn.Primary"
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Crear" />
+            android:layout_width="wrap_content">
+
+            <Button
+                android:id="@+id/btFinish"
+                style="@style/Agile.Btn.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Crear" />
+
+            <Button
+                android:id="@+id/btDelete"
+                style="@style/Agile.Btn.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/background"
+                android:textColor="@color/danger"
+                android:layout_marginStart="16dp"
+                android:visibility="gone"
+                android:text="Eliminar producto" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
