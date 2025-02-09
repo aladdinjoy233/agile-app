@@ -174,6 +174,26 @@ public class FormSaleViewModel extends AndroidViewModel {
         actualizarPrecioTotal();
     }
 
+    public void codigoEscaneado(String codigo) {
+        ArrayList<Producto> listaProductos = productos.getValue();
+        Producto producto = null;
+        if (listaProductos == null) return;
+
+//        Buscamos el producto
+        for (Producto p : listaProductos) {
+            if (p.getCodigo().equals(codigo)) {
+                producto = p;
+                break;
+            }
+        }
+
+        if (producto == null) {
+            Toast.makeText(context, "No se encontro el producto", Toast.LENGTH_SHORT).show();
+        }
+
+        agregarProductoALaVenta(producto.getProductoId());
+    }
+
     public void sumarCantidad(int productoId) {
         ArrayList<VentaItem> listaActual = productosSeleccionados.getValue();
         Producto producto = obtenerProductoConId(productoId);
