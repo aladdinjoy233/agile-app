@@ -21,7 +21,7 @@
 
             <!-- Titulo -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -41,14 +41,37 @@
                     app:srcCompat="@drawable/ic_back"
                     app:tint="@color/text" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
                 <TextView
                     android:id="@+id/tvTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22dp"
-                    android:layout_marginStart="15dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="Productos" />
+                    android:text="Nueva venta" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:id="@+id/btCodigo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/et_border"
+                    android:contentDescription="Escanear codigo de barra"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_scan"
+                    app:tint="@color/text" />
 
             </LinearLayout>
 
@@ -67,6 +90,16 @@
 
         </LinearLayout>
 
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/text"/>
+
         <!-- Filters -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFilters"
@@ -79,10 +112,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_weight="1"
             android:layout_marginTop="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -93,6 +127,10 @@
                 android:paddingBottom="64dp" />
 
         </LinearLayout>
+
+<!--        <View-->
+<!--            android:layout_height="68dp"-->
+<!--            android:layout_width="match_parent"/>-->
 
     </LinearLayout>
 
@@ -121,14 +159,12 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/bg_sales_bar"/>
 
-            <include layout="@layout/card_sale" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVentas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="64dp" />
+                android:paddingBottom="16dp" />
 
         </LinearLayout>
 
@@ -169,6 +205,7 @@
                 app:tint="@color/primaryDark" />
 
             <TextView
+                android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

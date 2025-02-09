@@ -100,7 +100,7 @@
                 android:layout_marginTop="5dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/et_border_right"
-                android:contentDescription="Volver"
+                android:contentDescription="Escanear codigo de barra"
                 android:padding="7dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
