@@ -97,12 +97,19 @@ public class ProductsFragment extends Fragment implements FilterAdapter.OnCatego
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.btClear.setVisibility(s.toString().trim().isEmpty() ? View.GONE : View.VISIBLE);
                 vm.setQuery(s.toString());
                 vm.filtrarProductos();
             }
 
             @Override
             public void afterTextChanged(Editable s) {}
+        });
+
+        binding.btClear.setOnClickListener(v -> {
+            binding.etSearch.setText("");
+            binding.etSearch.clearFocus();
+            hideKeyboard();
         });
 
 //        Close the keyboard when they tap search

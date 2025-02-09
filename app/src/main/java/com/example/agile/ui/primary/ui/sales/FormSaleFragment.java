@@ -1,5 +1,7 @@
 package com.example.agile.ui.primary.ui.sales;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,13 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -36,6 +42,7 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
     private BottomSheetBehavior<LinearLayout> bsbMenu;
     private BottomSheetBehavior<LinearLayout> bsbList;
     private FormSaleViewModel vm;
+    private EditText etSearch;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
 
         binding = FragmentFormSaleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        etSearch = binding.etSearch;
 
         binding.btBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
@@ -100,7 +109,39 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
             binding.rvVentas.setAdapter(adapter);
         });
 
-//        TODO: Agregar busqueda y escaneo de código de barras
+//        Textwatcher para la busqueda
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.btClear.setVisibility(s.toString().trim().isEmpty() ? View.GONE : View.VISIBLE);
+                vm.setQuery(s.toString());
+                vm.filtrarProductos();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        binding.btClear.setOnClickListener(v -> {
+            binding.etSearch.setText("");
+            binding.etSearch.clearFocus();
+            hideKeyboard();
+        });
+
+//        Cerrar teclado cuando tocan la decla de busqueda
+        binding.etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard();
+                return true;
+            }
+            return false;
+        });
+
+//        TODO: Agregar escaneo de código de barras
 
         return root;
     }
@@ -155,10 +196,9 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
     }
 
     private void hideKeyboard() {
-        View view = requireActivity().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
         }
     }
 
