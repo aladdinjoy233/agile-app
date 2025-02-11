@@ -6,7 +6,7 @@ public class VentaItem {
     private int cantidad;
     private float precioUnidad;
     private String nombre;
-    private int ventasId;
+    private int ventaId;
 
     public VentaItem(int productoId, int cantidad, float precioUnidad, String nombre) {
         this.productoId = productoId;
@@ -15,13 +15,13 @@ public class VentaItem {
         this.nombre = nombre;
     }
 
-    public VentaItem(int id, int productoId, int cantidad, float precioUnidad, String nombre, int ventasId) {
+    public VentaItem(int id, int productoId, int cantidad, float precioUnidad, String nombre, int ventaId) {
         this.id = id;
         this.productoId = productoId;
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
         this.nombre = nombre;
-        this.ventasId = ventasId;
+        this.ventaId = ventaId;
     }
 
     public int getId() {

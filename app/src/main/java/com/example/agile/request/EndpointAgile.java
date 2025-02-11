@@ -4,7 +4,9 @@ import com.example.agile.models.Categoria;
 import com.example.agile.models.Producto;
 import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
+import com.example.agile.models.VentaItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -109,4 +111,12 @@ public interface EndpointAgile {
 //    Eliminar producto
     @DELETE("productos/eliminar/{tiendaId}/{productoId}")
     Call<Void> eliminarProducto(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Path("productoId") int productoId);
+
+//    ===============================
+//    ===== Funciones de ventas =====
+//    ===============================
+
+//    Crear Venta
+    @POST("ventas/crear/{tiendaId}")
+    Call<Void> crearVenta(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Body ArrayList<VentaItem> items);
 }

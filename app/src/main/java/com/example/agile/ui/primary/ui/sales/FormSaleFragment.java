@@ -214,6 +214,11 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
             }
         });
 
+//        Guardar venta
+        binding.btFinish.setOnClickListener(v -> {
+            vm.guardarVenta();
+        });
+
         return root;
     }
 

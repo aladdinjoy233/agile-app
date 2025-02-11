@@ -189,6 +189,7 @@ public class FormSaleViewModel extends AndroidViewModel {
 
         if (producto == null) {
             Toast.makeText(context, "No se encontro el producto", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         agregarProductoALaVenta(producto.getProductoId());
@@ -259,5 +260,35 @@ public class FormSaleViewModel extends AndroidViewModel {
 
         DecimalFormat df = new DecimalFormat("$#0.00");
         return df.format(f);
+    }
+
+    public void guardarVenta() {
+        SharedPreferences sp = context.getSharedPreferences("agile.xml", Context.MODE_PRIVATE);
+        String token = sp.getString("token", "");
+        int storeId = sp.getInt("selected_store_id", -1);
+
+        if (token.isEmpty()) {
+            return;
+        }
+
+        EndpointAgile endpoint = ApiClient.getEndpoint();
+        Call<Void> call = endpoint.crearVenta(token, storeId, productosSeleccionados.getValue());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+//                    operationCompleted.setValue(true);
+                    Toast.makeText(context, "Venta creada", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Error al crear la venta", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Toast.makeText(context, "Error al crear la venta", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
