@@ -21,9 +21,13 @@ import com.example.agile.databinding.FragmentSalesBinding;
 public class SalesFragment extends Fragment {
 
     private FragmentSalesBinding binding;
+    private SalesViewModel vm;
+    private SaleSharedViewModel sharedViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SalesViewModel vm = new ViewModelProvider(this).get(SalesViewModel.class);
+        vm = new ViewModelProvider(this).get(SalesViewModel.class);
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SaleSharedViewModel.class);
 
         binding = FragmentSalesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -36,6 +40,14 @@ public class SalesFragment extends Fragment {
             ft.replace(R.id.nav_host_fragment_activity_primary, FormSaleFragment.class, null)
                     .addToBackStack(null)
                     .commit();
+        });
+
+//        Observe refresh trigger
+        sharedViewModel.getRefreshTrigger().observe(getViewLifecycleOwner(), trigger -> {
+            if (trigger) {
+                vm.obtenerVentas();
+                sharedViewModel.resetRefresh();
+            }
         });
 
         return root;

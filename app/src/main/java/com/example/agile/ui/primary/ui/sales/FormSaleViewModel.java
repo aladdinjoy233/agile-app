@@ -31,6 +31,7 @@ public class FormSaleViewModel extends AndroidViewModel {
 
     private Context context;
     String query = "";
+    private MutableLiveData<Boolean> operationCompleted = new MutableLiveData<>();
 
     private MutableLiveData<String> precioTotal = new MutableLiveData<>("$0.00");
 
@@ -59,6 +60,9 @@ public class FormSaleViewModel extends AndroidViewModel {
     }
 
     //    Getters and setters
+
+    public MutableLiveData<Boolean> getOperationCompleted() { return operationCompleted; }
+
     public MutableLiveData<String> getPrecioTotal() { return precioTotal; }
 
     public MutableLiveData<Boolean> getIsMenuExpanded() { return isMenuExpanded; }
@@ -278,8 +282,7 @@ public class FormSaleViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
-//                    operationCompleted.setValue(true);
-                    Toast.makeText(context, "Venta creada", Toast.LENGTH_SHORT).show();
+                    operationCompleted.setValue(true);
                 } else {
                     Toast.makeText(context, "Error al crear la venta", Toast.LENGTH_SHORT).show();
                 }

@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
@@ -66,6 +67,7 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
     private BottomSheetBehavior<LinearLayout> bsbMenu;
     private BottomSheetBehavior<LinearLayout> bsbList;
     private FormSaleViewModel vm;
+    private SaleSharedViewModel sharedViewModel;
     private EditText etSearch;
 
 //    Barcode scan
@@ -109,6 +111,7 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         vm = new ViewModelProvider(this).get(FormSaleViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SaleSharedViewModel.class);
 
         binding = FragmentFormSaleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -216,10 +219,31 @@ public class FormSaleFragment extends Fragment implements FilterAdapter.OnCatego
 
 //        Guardar venta
         binding.btFinish.setOnClickListener(v -> {
-            vm.guardarVenta();
+            dialogGuardarVenta();
+        });
+
+        vm.getOperationCompleted().observe(getViewLifecycleOwner(), completed -> {
+            if (Boolean.TRUE.equals(completed)) {
+                sharedViewModel.triggerRefresh();
+                getParentFragmentManager().popBackStack();
+            }
         });
 
         return root;
+    }
+
+    private void dialogGuardarVenta() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Guardar venta");
+        builder.setMessage("¿Desea guardar la venta?");
+        builder.setPositiveButton("Si", (dialog, which) -> {
+            vm.guardarVenta();
+            dialog.dismiss();
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.show();
     }
 
     private void verificarPermisoCamaraYEscanear() {

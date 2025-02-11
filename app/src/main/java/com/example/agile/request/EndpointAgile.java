@@ -4,6 +4,7 @@ import com.example.agile.models.Categoria;
 import com.example.agile.models.Producto;
 import com.example.agile.models.Tienda;
 import com.example.agile.models.Usuario;
+import com.example.agile.models.Venta;
 import com.example.agile.models.VentaItem;
 
 import java.util.ArrayList;
@@ -119,4 +120,8 @@ public interface EndpointAgile {
 //    Crear Venta
     @POST("ventas/crear/{tiendaId}")
     Call<Void> crearVenta(@Header("Authorization") String token, @Path("tiendaId") int tiendaId, @Body ArrayList<VentaItem> items);
+
+//    Obtener lista de ventas
+    @GET("ventas/listar/{tiendaId}")
+    Call<List<Venta>> obtenerVentas(@Header("Authorization") String token, @Path("tiendaId") int tiendaId);
 }
