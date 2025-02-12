@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.agile.R;
 import com.example.agile.databinding.FragmentSalesBinding;
@@ -40,6 +41,16 @@ public class SalesFragment extends Fragment {
             ft.replace(R.id.nav_host_fragment_activity_primary, FormSaleFragment.class, null)
                     .addToBackStack(null)
                     .commit();
+        });
+
+//        RecyclerView de ventas
+        vm.getVentas().observe(getViewLifecycleOwner(), ventas -> {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+            layoutManager.setStackFromEnd(true);
+            binding.rvVentas.setLayoutManager(layoutManager);
+
+            VentaAdapter adapter = new VentaAdapter(ventas, getLayoutInflater());
+            binding.rvVentas.setAdapter(adapter);
         });
 
 //        Observe refresh trigger
